@@ -1,0 +1,10 @@
+---
+version: '3.8'
+services:
+  az-int-format:
+    image: mysql
+    ports:
+      - 6578:5304
+    environment:
+        MYSQL_ROOT_PASSWORD: "rajesh"
+        MYSQL_USER: "rajesh"

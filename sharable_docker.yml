@@ -1,0 +1,17 @@
+---
+version: '3.8'
+services:
+  cat:
+    image: nginx
+    ports:
+      - 9999:8080
+    volumes:
+      - myvolume:/data
+  dog:
+    image: nginx
+    ports:
+      - 8888:8080
+    volumes_from:
+      - cat
+volumes:
+  myvolume:

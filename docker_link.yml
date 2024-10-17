@@ -1,0 +1,16 @@
+---
+version: '3.8'
+services:
+  mydb:
+    image: mysql
+    ports:
+      - 8888:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: extio
+      MYSQL_USER: extio
+  myweb:
+    image: nginx
+    ports:
+      - 8080:80
+    links:
+      - mydb:mysql

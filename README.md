@@ -74,3 +74,118 @@ these volumes are used to preserve data on the hostmachine even if the container
 these volumes or bidirectional we made change in host machine it will reflect in containers,
 we made changes on containers it will reflect on host machine.
 
+## NETWORKS
+
+In Docker, networking options allow containers to communicate with each other and with the external world in different ways. Here's an overview of the different network types—bridge, host, null, and overlay—and their key differences:
+
+ 1. Bridge Network
+
+- Description: The default network driver for Docker containers. It creates a private internal network on your host system and connects containers to this network.
+- Use Case: Suitable for when you want containers to communicate with each other on the same host but isolate them from the external network.
+- Key Features:
+  - Isolation: Containers connected to a bridge network can communicate with each other, but not with the host network or other networks unless specifically configured.
+  - Port Mapping: To expose container ports to the host, you need to use port mapping (e.g., `-p 8080:80`).
+
+```
+  docker network create bridge
+```  
+
+  - Example Configuration in `docker-compose.yml`:
+
+```
+version: '3.8'
+    services:
+      web:
+        image: nginx
+        networks:
+          - my_bridge_network
+    networks:
+      my_bridge_network:
+        driver: bridge
+```       
+    
+
+ 2. Host Network
+
+- Description: Removes network isolation between the container and the Docker host. The container shares the host’s network stack.
+- Use Case: Ideal for performance-sensitive applications where you need the container to have direct access to the host network. Often used for low-latency applications.
+- Key Features:
+  - No Network Isolation: Containers share the host's IP address and network interfaces.
+  - Port Conflicts: Since the container and host share the same network, port conflicts can occur if the same port is used on both.
+
+```
+  docker run --network host nginx
+ ``` 
+
+  - Example Configuration in `docker-compose.yml`:
+
+   ``` 
+    version: '3.8'
+    services:
+      web:
+        image: nginx
+        network_mode: host
+    ```
+
+ 3. Null Network
+
+- Description: A special network driver that essentially disables networking for containers.
+- Use Case: Useful for containers that do not require network access and should not communicate with other containers or the outside world.
+- Key Features:
+  - No Network Access: Containers using the null network are isolated from all network traffic.
+  
+```
+  docker network create -d null my_null_network
+ ``` 
+
+  - Example Configuration in `docker-compose.yml`:
+
+ ```   
+    version: '3.8'
+    services:
+      web:
+        image: nginx
+        networks:
+          - my_null_network
+    networks:
+      my_null_network:
+        driver: null
+ ```   
+
+ 4. Overlay Network
+
+- Description: A network driver used to connect Docker containers across multiple Docker hosts, using a virtual network layer over the host’s network.
+- Use Case: Ideal for multi-host deployments, such as in Docker Swarm or Kubernetes environments, where services need to communicate across different hosts.
+- Key Features:
+  - Multi-Host Networking: Allows containers on different Docker hosts to communicate as if they were on the same network.
+  - Requires a Key-Value Store: Typically requires a key-value store like etcd, Consul, or Zookeeper for managing network state.
+
+```
+  docker network create --driver overlay my_overlay_network
+```
+
+
+Example Configuration in `docker-compose.yml`:
+
+
+ ```   
+    version: '3.8'
+    services:
+      web:
+        image: nginx
+        networks:
+          - my_overlay_network
+    networks:
+      my_overlay_network:
+        driver: overlay```
+        
+
+ Summary of Differences:
+
+- Bridge: Default, isolated network suitable for single-host communication.
+- Host: Shares the host’s network stack, removing isolation and potentially improving performance.
+- Null: Disables networking entirely for containers, useful for non-networked services.
+- Overlay: Extends network capabilities across multiple Docker hosts, useful for clustering and orchestration setups.
+
+Choosing the right network driver depends on your specific use case, including considerations for performance, isolation, and whether your containers need to communicate across different hosts.
+ 

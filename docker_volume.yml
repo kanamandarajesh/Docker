@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  web:
+    image: nginx
+    ports:
+      - 5000:8080
+    volumes:
+      - db_data:/data
+  db:
+    image: nginx
+    ports:
+      - 5757:8080
+    volumes:
+      - db_data:/data
+volumes:
+  db_data:

@@ -94,14 +94,14 @@ In Docker, networking options allow containers to communicate with each other an
 
 ```
 version: '3.8'
-    services:
+services:
       web:
         image: nginx
         networks:
           - my_bridge_network
-    networks:
-      my_bridge_network:
-        driver: bridge
+networks:
+  my_bridge_network:
+    driver: bridge
 ```       
     
 
@@ -119,13 +119,13 @@ version: '3.8'
 
   - Example Configuration in `docker-compose.yml`:
 
-   ``` 
-    version: '3.8'
-    services:
+```
+version: '3.8'
+services:
       web:
         image: nginx
         network_mode: host
-    ```
+```
 
  3. Null Network
 
@@ -136,7 +136,7 @@ version: '3.8'
   
 ```
   docker network create -d null my_null_network
- ``` 
+``` 
 
   - Example Configuration in `docker-compose.yml`:
 
@@ -150,7 +150,7 @@ version: '3.8'
     networks:
       my_null_network:
         driver: null
- ```   
+  ```   
 
  4. Overlay Network
 
@@ -168,16 +168,17 @@ version: '3.8'
 Example Configuration in `docker-compose.yml`:
 
 
- ```   
-    version: '3.8'
-    services:
+```   
+ version: '3.8'
+ services:
       web:
         image: nginx
         networks:
           - my_overlay_network
-    networks:
-      my_overlay_network:
-        driver: overlay```
+networks:
+  my_overlay_network:
+    driver: overlay
+ ```
         
 
  Summary of Differences:

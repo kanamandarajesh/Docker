@@ -286,7 +286,7 @@ Docker Compose Setup: In your docker-compose.yml file, define both the web appli
 version: '3'
 services:
   web:
-    image: my-web-app
+    image: mysql
     environment:
       - DATABASE_URL=mysql://db:3306
     depends_on:

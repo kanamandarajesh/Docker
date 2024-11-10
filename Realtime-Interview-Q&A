@@ -10,10 +10,7 @@ In this scenario, you need to create a Dockerized environment for both the front
 Create a Dockerfile for the Backend (Node.js) Service:
 
 backend/Dockerfile:
-
 Dockerfile
-
-
 
 FROM node:14
 WORKDIR /app
@@ -29,7 +26,7 @@ Create a Dockerfile for the Frontend (React) Service:
 
 frontend/Dockerfile:
 Dockerfile
-Copy code
+
 FROM node:14 AS build
 WORKDIR /app
 COPY package*.json ./
@@ -42,6 +39,7 @@ COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 Create a docker-compose.yml file to define the services:
+
 
 docker-compose.yml:
 yaml

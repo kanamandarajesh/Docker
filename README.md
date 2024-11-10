@@ -328,16 +328,15 @@ Use a smaller base image: If you're using a large base image (e.g., python:3.x),
 Order commands to maximize caching: Docker caches layers from the top down. Therefore, frequently changing parts of your Dockerfile should be placed towards the bottom. For example:
 
 ```
-FROM python:3.9-slim
+FROM python:3.9
 
-# Install dependencies first (this rarely changes)
-COPY requirements.txt /app/
-RUN pip install -r /app/requirements.txt
-
-# Then copy the rest of the application files (this changes more often)
-COPY . /app/
-
+# Set the working directory inside the container
 WORKDIR /app
+
+# Copy the rest of the application code into the container
+COPY . .
+
+# Command to run the application
 CMD ["python", "app.py"]
 ```
 
@@ -348,15 +347,23 @@ Use multi-stage builds: Multi-stage builds allow you to separate the build envir
 ```
 # Build stage
 FROM python:3.9 AS build
+
+# Set the working directory inside the container
 WORKDIR /app
+
+# Copy the rest of the application code into the container
 COPY . .
-RUN pip install --target=/app/dependencies -r requirements.txt
 
 # Final stage
 FROM python:3.9-slim
+
+# Set the working directory inside the container
 WORKDIR /app
-COPY --from=build /app/dependencies /app/dependencies
-COPY . .
+
+# Copy the installed dependencies from the build stage
+COPY --from=build /app /app
+
+# Command to run the application
 CMD ["python", "app.py"]
 ```
 

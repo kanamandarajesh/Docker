@@ -15,15 +15,14 @@ Dockerfile
 
 
 
-```
-  FROM node:14
-  WORKDIR /app
-  COPY package*.json ./
-  RUN npm install
-  COPY . .
-  EXPOSE 3000
-  CMD ["npm", "start"]
-```
+FROM node:14
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]
+
 
 
 Create a Dockerfile for the Frontend (React) Service:

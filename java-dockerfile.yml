@@ -1,0 +1,14 @@
+# Step 1: Use the official OpenJDK image from Docker Hub
+FROM openjdk:11-jre-slim
+
+# Step 2: Set the working directory inside the container
+WORKDIR /app
+
+# Step 3: Copy the compiled Java JAR file into the container
+COPY target/my-app.jar /app/my-app.jar
+
+# Step 4: Expose the port your app will run on (default is 8080)
+EXPOSE 8080
+
+# Step 5: Define the command to run the Java application
+CMD ["java", "-jar", "my-app.jar"]

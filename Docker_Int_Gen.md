@@ -1,4 +1,4 @@
-Sure! Here are answers to the Docker interview questions you provided:
+Docker interview questions:
 
 ### **Basic Docker Concepts**
 
@@ -204,5 +204,3 @@ Sure! Here are answers to the Docker interview questions you provided:
    - Use `docker network ls` to list networks, `docker network inspect` to inspect network details, and `docker exec` to interact with containers and check network settings.
 
 ---
-
-These answers cover key concepts and practical usage of Docker. Make sure you practice hands-on with Docker to reinforce your understanding!

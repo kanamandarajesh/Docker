@@ -129,4 +129,4 @@ You can connect or disconnect containers from networks as needed:
 | **overlay**       | Used in Swarm or multi-host communication.                                                | Cross-host container communication.                |
 | **macvlan**       | Containers need to be reachable on the network like physical devices.                     | Containers have their own IP addresses.            |
 
-Docker networks allow you to configure communication between containers and with external networks based on your needs. If you'd like more details on any specific network driver, feel free to ask!
+Docker networks allow you to configure communication between containers and with external networks based on your needs.

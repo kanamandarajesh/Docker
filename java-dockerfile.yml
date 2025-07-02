@@ -1,5 +1,5 @@
 
-````
+```
 # Step 1: Use the official OpenJDK image from Docker Hub
 FROM openjdk:11-jre-slim
 
@@ -14,7 +14,6 @@ EXPOSE 8080
 
 # Step 5: Define the command to run the Java application
 CMD ["java", "-jar", "my-app.jar"]
-
 ```
 
 

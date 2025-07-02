@@ -17,6 +17,8 @@ CMD ["java", "-jar", "my-app.jar"]
 ```
 
 
+Multi stage Build For Java
+
 ```
 # ----------- Stage 1: Build the Java application -----------
 FROM maven:3.9.6-eclipse-temurin-17 AS build

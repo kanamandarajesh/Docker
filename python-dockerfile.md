@@ -21,7 +21,7 @@ ENV PYTHONUNBUFFERED 1
 CMD ["python", "app.py"]
 ```
 
-Below is for python multistage build dockerfile
+Below is for python multistage dockerfile
 
 ```
 # ---------- Stage 1: Build stage ----------
